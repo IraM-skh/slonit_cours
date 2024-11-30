@@ -12,16 +12,23 @@ const guessTest = (number) => {
   }
   return "Угадал!";
 };
-
+let answer = null;
 const binarySearch = (startNumber, lastNumber) => {
-  const currentTestingNumber =
-    Math.floor((lastNumber - startNumber) / 2) + startNumber;
-
+  const difference = (lastNumber - startNumber) / 2;
+  let currentTestingNumber = Math.floor(difference) + startNumber;
+  if (difference < 1) {
+    if (answer === "Меньше.") {
+      currentTestingNumber = startNumber;
+    }
+    if (answer === "Больше.") {
+      currentTestingNumber = lastNumber;
+    }
+  }
   console.log(
     `Компьютер 2: Поиск в диапазоне от ${startNumber} до ${lastNumber}. Пробую число ${currentTestingNumber}.`
   );
 
-  const answer = guessTest(currentTestingNumber);
+  answer = guessTest(currentTestingNumber);
   console.log(`Компьютер 1: ${answer}`);
 
   if (answer === "Меньше.") {
